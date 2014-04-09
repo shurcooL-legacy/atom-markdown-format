@@ -1,8 +1,8 @@
-markdown-format package
+Markdown Format Package
 =======================
 
-Markdown Format runs `markdownfmt` on save, which formats your Markdown text to look like the HTML.
+It runs `markdownfmt` on save, which formats your Markdown text to look like the HTML.
 
 You need to point to the path of the `markdownfmt` binary, which you can get at [github.com/shurcooL/markdownfmt](https://github.com/shurcooL/markdownfmt).
 
-![](Demo.gif)
+![Markdown Format Demo](https://github.com/shurcooL/atom-markdown-format/blob/master/Demo.gif?raw=true)
