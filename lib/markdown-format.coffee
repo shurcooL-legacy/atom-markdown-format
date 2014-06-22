@@ -6,10 +6,10 @@ class MarkdownFormat
       @handleSave(editor)
 
   destroy: ->
+    atom.unsubscribe()
 
   handleSave: (editor) ->
-    buffer = editor.getBuffer()
-    buffer.on 'saved', =>
+    atom.subscribe editor.getBuffer(), 'saved', =>
       if editor.getGrammar().scopeName is 'source.gfm'
         options = [
           '-w'
