@@ -1,4 +1,4 @@
-Spawn = require('child_process').spawn
+markdownfmt = require('./markdownfmt.js')
 
 class MarkdownFormat
   constructor: ->
@@ -9,18 +9,12 @@ class MarkdownFormat
     atom.unsubscribe()
 
   handleSave: (editor) ->
-    atom.subscribe editor.getBuffer(), 'saved', =>
+    buffer = editor.getBuffer()
+    atom.subscribe buffer, 'will-be-saved', =>
       if editor.getGrammar().scopeName is 'source.gfm'
-        options = [
-          '-w'
-          editor.getUri()
-        ]
-        markdownfmt = Spawn(atom.config.get('markdown-format.pathToBinary'), options)
+        buffer.setTextViaDiff(markdownfmt.ProcessMarkdown(buffer.getText()))
 
 module.exports =
-  configDefaults:
-    pathToBinary: 'markdownfmt'
-
   activate: ->
     @markdownFormat = new MarkdownFormat()
 
