@@ -11,7 +11,7 @@ import (
 /*
 Rebuild steps:
 
-`gopherjs build markdownfmt.go`
+`gopherjs build -m markdownfmt.go`
 */
 
 func ProcessMarkdown(text string) string {
