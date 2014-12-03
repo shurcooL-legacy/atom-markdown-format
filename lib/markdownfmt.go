@@ -1,5 +1,7 @@
 // +build js
 
+//go:generate gopherjs build -m markdownfmt.go
+
 package main
 
 import (
@@ -7,12 +9,6 @@ import (
 
 	"github.com/shurcooL/markdownfmt/markdown"
 )
-
-/*
-Rebuild steps:
-
-`gopherjs build -m markdownfmt.go`
-*/
 
 func ProcessMarkdown(text string) string {
 	output, err := markdown.Process("", []byte(text), nil)
