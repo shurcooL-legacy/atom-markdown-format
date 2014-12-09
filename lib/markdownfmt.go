@@ -7,16 +7,24 @@ package main
 import (
 	"github.com/gopherjs/gopherjs/js"
 
+	"gopkg.in/yaml.v2"
+
 	"github.com/shurcooL/markdownfmt/markdown"
 )
 
 func ProcessMarkdown(text string) string {
-	output, err := markdown.Process("", []byte(text), nil)
+	err := yaml.Unmarshal([]byte(text), &map[string]interface{}{})
 	if err != nil {
-		println("ProcessMarkdown:", err.Error())
-		return text
+		output := []byte("")
+		output, err = markdown.Process("", []byte(text), nil)
+		if err != nil {
+			println("ProcessMarkdown:", err.Error())
+			return text
+		}
+		return string(output)
 	}
-	return string(output)
+
+	return text
 }
 
 func main() {
