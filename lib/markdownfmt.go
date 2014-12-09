@@ -14,17 +14,18 @@ import (
 
 func ProcessMarkdown(text string) string {
 	err := yaml.Unmarshal([]byte(text), &map[string]interface{}{})
-	if err != nil {
-		output := []byte("")
-		output, err = markdown.Process("", []byte(text), nil)
-		if err != nil {
-			println("ProcessMarkdown:", err.Error())
-			return text
-		}
-		return string(output)
+	if err == nil {
+		return text
 	}
 
-	return text
+	output := []byte("")
+	output, err = markdown.Process("", []byte(text), nil)
+	if err != nil {
+		println("ProcessMarkdown:", err.Error())
+		return text
+	}
+
+	return string(output)
 }
 
 func main() {
