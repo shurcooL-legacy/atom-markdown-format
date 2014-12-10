@@ -6,10 +6,9 @@ package main
 
 import (
 	"github.com/gopherjs/gopherjs/js"
-
-	"regexp"
-
 	"github.com/shurcooL/markdownfmt/markdown"
+	"gopkg.in/yaml.v2"
+	"regexp"
 )
 
 var fmExp = fmRegexp{regexp.MustCompile(`^(?P<header>---\n[\S\s]*\n---\n)(?P<content>[\S\s]*)$`)}
@@ -48,7 +47,7 @@ func ProcessMarkdownText(text string) string {
 
 func ProcessMarkdown(text string) string {
 	frontmatterMatches := fmExp.FindStringSubmatchMap(text)
-	if len(frontmatterMatches) == 0 {
+	if len(frontmatterMatches) == 0 || nil != yaml.Unmarshal([]byte(text), &map[string]interface{}{}) {
 		return ProcessMarkdownText(text)
 	}
 
