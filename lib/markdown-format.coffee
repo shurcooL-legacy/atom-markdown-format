@@ -6,7 +6,7 @@ class MarkdownFormat
       @handleSave(editor)
 
   destroy: ->
-    @subscriptions.dispose()
+    @subscription.dispose()
 
   handleSave: (editor) ->
     buffer = editor.getBuffer()
