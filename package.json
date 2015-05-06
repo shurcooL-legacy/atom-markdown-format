@@ -1,7 +1,7 @@
 {
   "name": "markdown-format",
   "main": "./lib/markdown-format",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Formats your Markdown text on save.",
   "repository": "https://github.com/shurcooL/atom-markdown-format",
   "license": "MIT",
