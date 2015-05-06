@@ -2,17 +2,17 @@ markdownfmt = require('./markdownfmt.js')
 
 class MarkdownFormat
   constructor: ->
-    atom.workspace.eachEditor (editor) =>
+    atom.workspace.observeTextEditors (editor) =>
       @handleSave(editor)
 
   destroy: ->
-    atom.unsubscribe()
+    @subscriptions.dispose()
 
   handleSave: (editor) ->
     buffer = editor.getBuffer()
-    atom.subscribe buffer, 'will-be-saved', =>
-      if editor.getGrammar().scopeName is 'source.gfm'
-        buffer.setTextViaDiff(markdownfmt.ProcessMarkdown(buffer.getText()))
+    @subscription = buffer.onWillSave =>
+        if editor.getGrammar().scopeName is 'source.gfm'
+            buffer.setTextViaDiff(markdownfmt.ProcessMarkdown(buffer.getText()))
 
 module.exports =
   activate: ->
